@@ -1,0 +1,5 @@
+Mô tả tổng quan của 2 file data_preprocessing:
+
+Raw_Data_Quality.ipynb: Đánh giá chất lượng giữ liệu và xử lí dữ liệu cho từng file dữ liệu thô đã được chọn.
+
+final_dataset_after_quality_control.ipynb: Gộp các file đã được xử lí dữ liệu, chọn các thuộc tính quan trọng, tạo cột dtbhk, Xử lí giá trị null cho các cột.
