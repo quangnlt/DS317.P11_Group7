@@ -1,0 +1,5 @@
+HB  - không xóa thư mục 'instance', 'models', 'datasets'
+    - cài đặt thư viện flask-sqlalchemy
+
+    - Dữ liệu năm sinh ban đầu sẽ được trừ cho 1985 trước khi đưa vào mô hình,
+     nhưng dữ liệu mới từ bảng csv (Trường) thì năm sinh đã được chuẩn hóa nên cần cập nhật lại hàm predict

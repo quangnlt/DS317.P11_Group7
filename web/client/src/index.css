@@ -1,0 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", Helvetica,
+    Arial, sans-serif;
+  overflow-x: hidden;
+}
