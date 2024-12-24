@@ -8,4 +8,19 @@ Dự án này nhằm xây dựng một mô hình dự đoán điểm trung bình
 - Phân tích và trực quan hóa dữ liệu nhằm cung cấp thông tin giá trị.
 
 ### Thông tin liên hệ
-- Tác giả: Nhóm 7.
+- Tác giả:
+  Đinh Nhật Trường - 22521575
+  Nguyễn Lê Tấn Quang - 21522512
+  Phạm Anh Kiệt - 21522260
+  Nguyễn Thị Thanh Tuyền - 22521632
+  Trần Hoài Bão - 21520628
+  Đào Lê Duy Thịnh - 22521400
+  Đặng Phước Sang - 21521377
+
+
+
+
+
+
+
+
