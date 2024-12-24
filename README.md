@@ -12,11 +12,17 @@ Dự án này nhằm xây dựng một mô hình dự đoán điểm trung bình
   Đinh Nhật Trường - 22521575
   
   Nguyễn Lê Tấn Quang - 21522512
+  
   Phạm Anh Kiệt - 21522260
+  
   Nguyễn Thị Thanh Tuyền - 22521632
+  
   Trần Hoài Bão - 21520628
+  
   Đào Lê Duy Thịnh - 22521400
+  
   Đặng Phước Sang - 21521377
+  
 
 
 
