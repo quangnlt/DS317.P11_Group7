@@ -10,6 +10,7 @@ Dự án này nhằm xây dựng một mô hình dự đoán điểm trung bình
 ### Thông tin liên hệ
 - Tác giả:
   Đinh Nhật Trường - 22521575
+  
   Nguyễn Lê Tấn Quang - 21522512
   Phạm Anh Kiệt - 21522260
   Nguyễn Thị Thanh Tuyền - 22521632
