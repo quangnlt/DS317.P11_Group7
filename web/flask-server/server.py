@@ -49,8 +49,21 @@ model = TabNetRegressor()
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # print(request.json)
-    # print('hello')
+
+    coefficients = {
+        "namsinh": 0,
+        "gioitinh": 0,
+        "dtb_toankhoa": 0,
+        "dtb_tichluy": 0,
+        "sotc_tichluy": 0,
+        "diemtbhk_1": 0,
+        "diemtbhk_2": 0,
+        "diemtbhk_3": 0,
+        "diemtbhk_4": 0,
+        "diemtbhk_5": 0,
+        "diemtbhk_6": 0,
+        "diemtbhk_7": 0
+    }
     form = request.json
     if not form:
         return jsonify({'error': 'No formData provided'}), 400
@@ -68,8 +81,13 @@ def predict():
     ]
     i = 1
     while 'diemtbhk_' + str(i) in form:
-        predictors.append(float(form['diemtbhk_' + str(i)]))
-        i += 1
+        if form['diemtbhk_' + str(i)] != 0:
+            predictors.append(float(form['diemtbhk_' + str(i)]))
+            i += 1
+        else:
+            break
+    
+    
     # print(predictors)
     model_path = f'models/tabnet_diemtbhk_{len(predictors)-4}.pt.zip'
     model.load_model(model_path)
@@ -77,7 +95,102 @@ def predict():
     prediction = model.predict(X)
     result = float(prediction[0][0])
 
-    return jsonify({'result': result, 'message': 'Đã nhận kết quả dự đoán'})
+    # Define coefficients for each scenario
+    coefficients_map = {
+        12: {
+            "namsinh": 2.75,
+            "gioitinh": 1.97,
+            "dtb_toankhoa": 57.49,
+            "dtb_tichluy": 2.22,
+            "sotc_tichluy": 13.29,
+            "diemtbhk_1": 4.65,
+            "diemtbhk_2": 2.70,
+            "diemtbhk_3": 1.60,
+            "diemtbhk_4": 3.39,
+            "diemtbhk_5": 4.91,
+            "diemtbhk_6": 1.59,
+            "diemtbhk_7": 3.43
+        },
+        11: {
+            "namsinh": 2.75,
+            "gioitinh": 1.97,
+            "dtb_toankhoa": 57.49,
+            "dtb_tichluy": 2.22,
+            "sotc_tichluy": 13.29,
+            "diemtbhk_1": 5.22,
+            "diemtbhk_2": 3.27,
+            "diemtbhk_3": 2.17,
+            "diemtbhk_4": 3.96,
+            "diemtbhk_5": 5.48,
+            "diemtbhk_6": 2.16
+        },
+        10: {
+            "namsinh": 2.75,
+            "gioitinh": 1.97,
+            "dtb_toankhoa": 57.49,
+            "dtb_tichluy": 2.22,
+            "sotc_tichluy": 13.29,
+            "diemtbhk_1": 6.27,
+            "diemtbhk_2": 4.32,
+            "diemtbhk_3": 3.22,
+            "diemtbhk_4": 4.96,
+            "diemtbhk_5": 6.48
+        },
+        9: {
+            "namsinh": 2.75,
+            "gioitinh": 1.97,
+            "dtb_toankhoa": 57.49,
+            "dtb_tichluy": 2.22,
+            "sotc_tichluy": 13.29,
+            "diemtbhk_1": 7.13,
+            "diemtbhk_2": 5.18,
+            "diemtbhk_3": 4.08,
+            "diemtbhk_4": 5.82
+        },
+        8: {
+            "namsinh": 2.75,
+            "gioitinh": 1.97,
+            "dtb_toankhoa": 57.49,
+            "dtb_tichluy": 2.22,
+            "sotc_tichluy": 13.29,
+            "diemtbhk_1": 9.10,
+            "diemtbhk_2": 7.15,
+            "diemtbhk_3": 6.05
+        },
+        7: {
+            "namsinh": 2.75,
+            "gioitinh": 1.97,
+            "dtb_toankhoa": 57.49,
+            "dtb_tichluy": 2.22,
+            "sotc_tichluy": 13.29,
+            "diemtbhk_1": 12.21,
+            "diemtbhk_2": 10.26
+        },
+        6: {
+            "namsinh": 2.75,
+            "gioitinh": 1.97,
+            "dtb_toankhoa": 57.49,
+            "dtb_tichluy": 2.22,
+            "sotc_tichluy": 13.29,
+            "diemtbhk_1": 22.27
+        }
+    }
+
+    # Update coefficients based on the number of predictors
+    predictor_count = len(predictors)
+    print(len(predictors))
+    print(predictors)
+
+    if predictor_count in coefficients_map:
+        coefficients = coefficients_map[predictor_count]
+        print("Updated coefficients:", coefficients)
+        print(coefficients)
+        print(len(predictors))
+    else:
+        print(f"No coefficients available for {predictor_count} predictors.")
+        
+    
+    return jsonify({'result': result, 'message': 'Đã nhận kết quả dự đoán', 'coefficients': coefficients})
 
 @app.route("/login", methods=["POST"])
 def login():

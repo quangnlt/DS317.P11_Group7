@@ -160,7 +160,7 @@ const Home = () => {
           <button
             onClick={() => {
               handlePredict();
-              console.log("hello");
+              // console.log("hello");
               console.log(predict);
               setIsOpen(true);
             }}
