@@ -192,6 +192,7 @@ def predict():
     
     return jsonify({'result': result, 'message': 'Đã nhận kết quả dự đoán', 'coefficients': coefficients})
 
+
 @app.route("/login", methods=["POST"])
 def login():
     # Lấy dữ liệu mssv_login từ yêu cầu JSON

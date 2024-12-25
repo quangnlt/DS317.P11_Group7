@@ -3,12 +3,14 @@ import { useUserContext } from "./hooks/useUserContext";
 import Header from "./components/Header";
 import axios from "axios";
 import Modal from "./components/Modal";
+import PlotScore from "./components/PlotScore";
 
 const Home = () => {
   const { user } = useUserContext();
 
   const [isOpen, setIsOpen] = useState(false);
   const [predict, setPredict] = useState(undefined);
+  const [weight, setWeight] = useState("");
 
   const handlePredict = () => {
     const student_data = {
@@ -26,12 +28,12 @@ const Home = () => {
       diemtbhk_7: user.diemtbhk_7,
       diemtbhk_8: user.diemtbhk_8,
     };
-    console.log(student_data);
     axios
       .post("http://localhost:5000/predict", student_data)
       .then((response) => {
         console.log(response.data);
         setPredict(response.data.result);
+        setWeight(response.data.coefficients);
       })
       .catch((error) => {
         console.error(
@@ -40,6 +42,7 @@ const Home = () => {
         );
       });
   };
+  console.log(weight);
   return (
     <>
       <Header />
@@ -160,7 +163,7 @@ const Home = () => {
           <button
             onClick={() => {
               handlePredict();
-              // console.log("hello");
+              console.log("hello");
               console.log(predict);
               setIsOpen(true);
             }}
@@ -177,9 +180,22 @@ const Home = () => {
             Dự đoán điểm
           </button>
         </div>
+        {/* Hiển thị biểu đồ */}
+        <div
+          style={{
+            margin: "20px auto",
+            width: "80%",
+            padding: "10px",
+            backgroundColor: "#fff",
+            borderRadius: 10,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <PlotScore user={user} />
+        </div>
       </div>
       {isOpen && predict !== undefined && (
-        <Modal predict={predict} setIsOpen={setIsOpen} />
+        <Modal predict={predict} setIsOpen={setIsOpen} weight={weight} />
       )}
     </>
   );
